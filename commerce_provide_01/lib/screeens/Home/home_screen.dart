@@ -1,5 +1,7 @@
 import 'package:commerce_provide_01/screeens/Home/Widget/category.dart';
+import 'package:commerce_provide_01/models/product_model.dart';
 import 'package:commerce_provide_01/screeens/Home/Widget/image_slider.dart';
+import 'package:commerce_provide_01/screeens/Home/Widget/product_card.dart';
 import 'package:commerce_provide_01/screeens/Home/Widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'Widget/home_app_bar.dart';
@@ -13,8 +15,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentSlider = 0;
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    List<List<Product>> selectcategories = [
+      all,
+      shoes,
+      beauty,
+      womenFashion,
+      jewelry,
+      menFashion
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -27,12 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 30,
               ),
               // for custom AppBar
-              CustomAppBar(),
+              const CustomAppBar(),
               const SizedBox(
                 height: 20,
               ),
               // for search bar
-              MySearchBar(),
+              const MySearchBar(),
               const SizedBox(
                 height: 20,
               ),
@@ -48,7 +59,47 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 20),
               // for category selection
-              Categories(),
+              const Categories(),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Special For You",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text(
+                    "See all",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  // SizedBox(
+                  //   width: 10,
+                  // )
+                ],
+              ),
+              // for shopping items
+              GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.78,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                ),
+                itemCount: selectcategories[selectedIndex].length,
+                itemBuilder: (context, index) {
+                  return ProductCard(
+                    product: selectcategories[selectedIndex][index],
+                  );
+                },
+              )
             ],
           ),
         ),
