@@ -1,3 +1,4 @@
+import 'package:commerce_provide_01/constants.dart';
 import 'package:flutter/material.dart';
 
 class MySearchBar extends StatelessWidget {
@@ -5,6 +6,44 @@ class MySearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      height: 55,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: kcontentColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.search,
+            color: Colors.grey,
+            size: 30,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          const Flexible(
+            flex: 4,
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: "Search...", border: InputBorder.none),
+            ),
+          ),
+          Container(
+            height: 25,
+            width: 1.5,
+            color: Colors.grey,
+          ),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.tune,
+                color: Colors.grey,
+              ))
+        ],
+      ),
+    );
   }
 }
